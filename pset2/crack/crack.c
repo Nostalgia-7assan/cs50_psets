@@ -23,7 +23,7 @@ bool compare(char * a , char * b)
     return true ;
 }
 
-bool confrim(char a , char b , char c , char  d , char e , char* salt , char* argv)
+bool checkPassword(char a ,char b, char c, char  d, char e, char* salt, char* argv)
 {
     char plain[] = {a,b,c,d,e} ;
     char *hash = crypt (plain, salt);
@@ -51,32 +51,32 @@ int main (int argc, char *argv[])
     }
 
     char salt[3]={argv[1][0],argv[1][1]} ;
-    char chars[] = {'\0' ,'A' , 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' ,
-                    'P' , 'Q' , 'R' , 'S' , 'T' , 'U' , 'V' , 'W' , 'X' , 'Y' , 'Z' , 'a' , 'b' , 'c' , 'd' ,
-                    'e' , 'f' , 'g' , 'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 
-                    't' , 'u' , 'v' , 'w' , 'x' , 'y' , 'z'  };
+    char chars[] = {'\0', 'A' , 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' , 'K' , 'L' , 'M' , 'N' ,
+                    'O' , 'P' , 'Q' , 'R' , 'S' , 'T' , 'U' , 'V' , 'W' , 'X' , 'Y' , 'Z' , 'a' , 'b' , 'c' ,
+                    'd' , 'e' , 'f' , 'g' , 'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' ,
+                    's' , 't' , 'u' , 'v' , 'w' , 'x' , 'y' , 'z' };
     int i ,j , k , l , m ;
     int charslen = sizeof(chars) / sizeof(chars[1]);
     //generate one char words
     for (i = 0 ; i < charslen ; i++)
     {
-        bool a = confrim (chars[i] , '\0' , '\0' , '\0' , '\0' , salt ,argv[1]) ;
+        bool a = checkPassword(chars[i],'\0','\0','\0','\0',salt,argv[1]) ;
         if(a)
         {
             return 0 ;
-        }   
-    } 
+        }
+    }
     //generate two char words
     /* the following loops starting from 1 to esacp null character */
     for (i = 1 ; i < charslen ; i++)
     {
     for( j = 1 ; j < charslen ; j++)
     {
-        bool a = confrim (chars[i] , chars[j] , '\0' , '\0' , '\0' , salt ,argv[1]) ;
+        bool a = checkPassword(chars[i],chars[j],'\0','\0','\0',salt,argv[1]) ;
         if(a)
         {
             return 0 ;
-        } 
+        }
     }
     }
     //generate three char words
@@ -86,7 +86,7 @@ int main (int argc, char *argv[])
     {
     for( k = 1 ; k < charslen ; k++)
     {
-        bool a = confrim (chars[i] , chars[j] , chars[k]  , '\0' , '\0' , salt ,argv[1]) ;
+        bool a = checkPassword(chars[i],chars[j],chars[k],'\0','\0',salt,argv[1]) ;
         if(a)
         {
             return 0 ;
@@ -103,7 +103,7 @@ int main (int argc, char *argv[])
     {
     for( l = 1 ; l < charslen ; l++)
     {
-        bool a = confrim (chars[i] , chars[j] , chars[k] , chars[l] , '\0' , salt ,argv[1]) ;
+        bool a = checkPassword(chars[i],chars[j],chars[k],chars[l],'\0',salt,argv[1]) ;
         if(a)
         {
             return 0 ;
@@ -124,7 +124,7 @@ int main (int argc, char *argv[])
     {
     for( m = 1 ; m < charslen ; m++)
     {
-        bool a = confrim (chars[i] , chars[j] , chars[k] , chars[l] , chars[m] , salt ,argv[1]) ;
+        bool a = checkPassword(chars[i],chars[j],chars[k],chars[l],chars[m],salt,argv[1]) ;
         if(a)
         {
             return 0 ;
@@ -133,5 +133,5 @@ int main (int argc, char *argv[])
     }
     }
     }
-    } 
+    }
 }

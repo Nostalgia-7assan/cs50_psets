@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <strings.h>
+#include <cs50.h>
 
 int main(int argc ,char* argv[])
 {
@@ -11,28 +12,20 @@ int main(int argc ,char* argv[])
      printf ("Error: Check the arguments\n");
      return 1 ;
  }
- char key[100] ;
+ string key = argv[1] ;
  int i  ;
- 
- for (i = 0 ; i < strlen(argv[1]) ; i++)
- {
-     key[i] = argv[1][i] ;
- }
-
  for (i = 0 ; i < strlen(key) ; i++)
  {
      if (!(isalpha(key[i])))
      {
       printf ("Error: Check the arguments\n");
-      return 1 ;   
+      return 1 ;
      }
  }
 
- char plain[500] ;
- char cipher[500]  = "";
+ string plain = get_string("plaintext:  ");
+ char* cipher = plain;
  int j = 0;
- printf("plaintext:  ");  
- scanf("%[^\n]s" , plain);
  for (i = 0 ; i < strlen(plain) ; i++)
  {
      if (isalpha(plain[i]))
@@ -40,14 +33,14 @@ int main(int argc ,char* argv[])
          char alpha = plain[i] ;
          char keyindex = 0;
          if(isupper(key[j]))
-         {  
-             keyindex = key[j] - 65 ; 
+         {
+             keyindex = key[j] - 65 ;
          }
          else
-         {  
-             keyindex = key[j] - 97;  
+         {
+             keyindex = key[j] - 97;
          }
-            
+
          if (isupper(alpha))
          {
              alpha = alpha - 65 ;
@@ -67,13 +60,13 @@ int main(int argc ,char* argv[])
          {
              j = 0 ;
          }
-         
+
      }
      else
      {
          cipher[i] = plain[i] ;
      }
-     
+
  }
  printf("ciphertext: %s\n" , cipher);
  return 0 ;

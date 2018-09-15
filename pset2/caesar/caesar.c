@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <cs50.h>
 
 int main(int argc , char* argv[])
 {
@@ -11,11 +12,10 @@ int main(int argc , char* argv[])
      return 1 ;
  }
  int key = atoi(argv[1]);
- char plain[500] ;
- char* cipher  ;
+ string plain  ;
+ plain = get_string("plaintext:  ") ;
+ string cipher = plain ;
  int i ;
- printf("plaintext:  ");  
- scanf("%[^\n]s" , plain);
  for (i = 0 ; i < strlen(plain) ; i++)
  {
      if (isalpha(plain[i]))
@@ -35,13 +35,13 @@ int main(int argc , char* argv[])
              alpha = alpha + 97 ;
              cipher[i] = alpha ;
          }
-         
+
      }
      else
      {
          cipher[i] = plain[i] ;
      }
-     
+
  }
  printf("ciphertext: %s\n" , cipher);
  return 0 ;
